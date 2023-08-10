@@ -3,20 +3,22 @@ import { HeroInterface } from '../hero.interface';
 import { HeroService } from '../hero.service';
 
 @Component({
-  selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css'],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class HeroesComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   heroes: HeroInterface[] = [];
 
   constructor(private heroService: HeroService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
+    this.heroService
+      .getHeroes()
+      .subscribe((heroes) => (this.heroes = heroes.slice(1, 5)));
   }
 }
